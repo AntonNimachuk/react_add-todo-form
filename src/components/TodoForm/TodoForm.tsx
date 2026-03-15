@@ -16,7 +16,7 @@ export const TodoForm: React.FC<Props> = ({ onAdd, users, todos }) => {
   const [titleError, setTitleError] = useState(false);
   const [userIdError, setUserIdError] = useState(false);
 
-  const maxId = Math.max(...todos.map(todo => todo.id)) + 1;
+  const maxId = todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
 
   const handleUserIdChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setUserId(+event.target.value);
@@ -30,15 +30,13 @@ export const TodoForm: React.FC<Props> = ({ onAdd, users, todos }) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (!title) {
-      setTitleError(true);
-    } if (!userId) {
-      setUserIdError(true);
-    } if (!title || !userId) {
-      return;
-    }
 
-    const user = users.find(u => u.id === userId);
+    if (!title) setTitleError(true);
+    if (!userId) setUserIdError(true);
+
+    const user = users.find(user => user.id === userId);
+
+    if (!title || !userId || !user) return;
 
     const newTodo : Todo = {
       id: maxId,

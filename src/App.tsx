@@ -11,7 +11,7 @@ export const App = () => {
 
   const todosWithUsers = todosFromServer.map(todo => ({
     ...todo,
-    user: usersFromServer.find(u => u.id === todo.userId),
+    user: usersFromServer.find(user => user.id === todo.userId),
   }));
 
   const [todos, setTodos] = useState(todosWithUsers);
