@@ -1,15 +1,14 @@
 /* eslint-disable */
-
-import users from '../../api/users';
+import { User } from '../../types/User';
 
 interface Props {
-  userId:number;
+  user:User;
 }
 
-export const UserInfo : React.FC<Props> = ({userId}) => {
+export const UserInfo : React.FC<Props> = ({user}) => {
   return(
-    <a className="UserInfo" href={`mailto:${users.find(u => u.id===userId)?.email}`}>
-      {`${users.find(u => u.id===userId)?.name}`}
+    <a className="UserInfo" href={`mailto:${user.email}`}>
+      {`${user.name}`}
     </a>
   );
 };

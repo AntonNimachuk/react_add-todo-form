@@ -38,11 +38,14 @@ export const TodoForm: React.FC<Props> = ({ onAdd, users, todos }) => {
       return;
     }
 
+    const user = users.find(u => u.id === userId);
+
     const newTodo : Todo = {
       id: maxId,
       title:title,
       completed:false,
       userId:userId,
+      user:user!
     };
 
     onAdd(newTodo);
